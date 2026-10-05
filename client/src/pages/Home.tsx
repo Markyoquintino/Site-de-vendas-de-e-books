@@ -17,11 +17,32 @@ import {
 } from "lucide-react";
 import { getCoverSource, loadCoverOverrides, type CoverOverrides } from "@/lib/coverOverrides";
 
-const STORAGE = "/manus-storage/";
+const STORAGE = "/assets/";
 const whatsapp =
   "https://wa.me/5527995126041?text=Ol%C3%A1!%20Vim%20pela%20DigitalQuintino%20e%20gostaria%20de%20conhecer%20os%20e-books%20dispon%C3%ADveis.";
 
 const products = [
+  {
+    tag: "NOVA LEITURA",
+    category: "MENTALIDADE · AUTOCONHECIMENTO",
+    title: "Mais Esperto que o Diabo",
+    description:
+      "Uma entrevista impossível e uma leitura provocadora para reconhecer as forças que governam sua mente — medo, indecisão, alienação e hábitos que se repetem.",
+    bullets: ["12 capítulos para virar a chave", "Reflexões sobre medo, propósito e autodisciplina", "E-book digital com acesso imediato pela Hotmart"],
+    image: `${STORAGE}mais-esperto-que-o-diabo.webp`,
+    imageClass: "wide",
+    panel: "charcoal",
+    href: "https://go.hotmart.com/Q107892470J",
+    message:
+      "Olá! Quero saber mais sobre o e-book “Mais Esperto que o Diabo”. Vi na DigitalQuintino e gostaria de receber ajuda para finalizar meu pedido.",
+    details: {
+      subtitle: "Uma leitura sobre liberdade mental — para não viver no automático.",
+      author: "Napoleon Hill",
+      gallery: [`${STORAGE}mais-esperto-que-o-diabo.webp`],
+      takeaways: ["Reconhecer os medos que estão dirigindo suas decisões", "Perceber quando um hábito virou um destino automático", "Recolocar propósito e pensamento independente no centro", "Entender o papel da autodisciplina e da adversidade"],
+      chapters: ["Meu primeiro encontro com Andrew Carnegie", "Um novo mundo se revela para mim", "Uma estranha entrevista com o Diabo", "Alienando-se com o Diabo", "A confissão continua", "Ritmo hipnótico", "Sementes do medo", "Propósito definido", "Educação e religião", "Autodisciplina", "Aprendendo com a adversidade", "Ambiente, tempo, harmonia e precaução"],
+    },
+  },
   {
     tag: "NOVO NA COLEÇÃO",
     category: "RESPONSABILIDADE PESSOAL",
@@ -604,7 +625,7 @@ export default function Home() {
       <PopularShelf onQuickView={setQuickViewProduct} coverOverrides={coverOverrides} />
 
       <section className="collection section-shell" id="colecao">
-        <SectionHeading eyebrow="A COLEÇÃO DIGITALQUINTINO" body="Dezoito leituras para momentos diferentes. Você escolhe o tema, conhece a proposta e segue para a Hotmart quando estiver pronto.">Escolha a próxima <em>página.</em></SectionHeading>
+        <SectionHeading eyebrow="A COLEÇÃO DIGITALQUINTINO" body="Dezenove leituras para momentos diferentes. Você escolhe o tema, conhece a proposta e segue para a Hotmart quando estiver pronto.">Escolha a próxima <em>página.</em></SectionHeading>
         <div className="collection-toolbar"><div className="collection-filters"><label htmlFor="category-filter">Filtrar por categoria</label><select id="category-filter" value={categoryFilter} onChange={(event) => setCategoryFilter(event.target.value)}>{categories.map((category) => <option key={category}>{category}</option>)}</select></div><span aria-live="polite">{normalizedSearch || categoryFilter !== "Todas as categorias" ? `${filteredProducts.length} resultado${filteredProducts.length === 1 ? "" : "s"}` : `${products.length} e-books para escolher`}</span>{(normalizedSearch || categoryFilter !== "Todas as categorias") && <button type="button" onClick={() => { setSearchTerm(""); setCategoryFilter("Todas as categorias"); }}>Limpar filtros</button>}</div>
         {filteredProducts.length > 0 ? <div className="product-grid">{filteredProducts.map((product) => <ProductCard product={product} onQuickView={setQuickViewProduct} coverOverrides={coverOverrides} key={product.title} />)}</div> : <div className="empty-results"><Search size={24} /><strong>Nenhum e-book encontrado</strong><p>Tente buscar por outro tema, título ou palavra-chave.</p><button className="button button-outline" type="button" onClick={() => { setSearchTerm(""); setCategoryFilter("Todas as categorias"); }}>Ver toda a coleção</button></div>}
         <Testimonials />
